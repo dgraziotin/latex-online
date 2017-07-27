@@ -19,10 +19,11 @@ RUN wget -q   http://mirrors.ctan.org/systems/texlive/Images/texlive$TL_VERSION.
 # Thanks to https://github.com/papaeye/docker-texlive for the reference
 COPY texlive.profile /tmp/
 
-RUN export DEBIAN_FRONTEND=noninteractive \
 # Sorted list of used packages.
-    && echo "deb http://ftp.us.debian.org/debian jessie contrib" > /etc/apt/sources.list.d/contrib.list; \
-    && echo "deb http://ftp.us.debian.org/debian jessie-updates contrib" >> /etc/apt/sources.list.d/contrib.list; \
+RUN echo "deb http://ftp.us.debian.org/debian jessie contrib" > /etc/apt/sources.list.d/contrib.list; \
+    echo "deb http://ftp.us.debian.org/debian jessie-updates contrib" >> /etc/apt/sources.list.d/contrib.list;
+
+RUN export DEBIAN_FRONTEND=noninteractive \
 # Update/Upgrade
     && apt-get clean \
     && apt-get update -y \
