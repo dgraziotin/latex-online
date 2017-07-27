@@ -5,6 +5,7 @@ TEXMFLOCAL /texlive/texmf-local
 TEXMFHOME $TEXMFLOCAL
 TEXMFVAR $TEXMFSYSVAR
 TEXMFCONFIG $TEXMFSYSCONFIG
+tlpdbopt_autobackup 0
 option_doc 0
 option_src 0
 portable 1 

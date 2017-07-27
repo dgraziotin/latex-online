@@ -1,3 +1,17 @@
+# About enhanced LaTeX.Online
+This service provides the same functionality offered by [aslushnikov/latex-online](https://github.com/aslushnikov/latex-online).
+However, this fork adapts the Docker installation directives by [chrisanthropic/docker-TeXlive](chrisanthropic/docker-TeXlive)
+to provide a LaTeX.Online service with a working full TeX Live 2017. For a refreshingly updated LaTeX.Online!
+
+The remaining of this README is the same as the one of [aslushnikov/latex-online](https://github.com/aslushnikov/latex-online).
+
+You may opt to use the custom docker image as follows:
+
+A Docker image is hosted and auto-updated on [hub.docker.com](https://hub.docker.com/r/dgraziotin/latex-online/)
+
+1. `docker pull dgraziotin/latex-online`
+2. `docker run -d -p 2700:2700 -t dgraziotin/latex-online`
+
 <!-- links to social media icons -->
 <!-- icons with padding -->
 [1.1]: http://i.imgur.com/tXSoThF.png (twitter icon with padding)
@@ -7,7 +21,7 @@
 [1]: http://www.twitter.com/latex_online
 <!-- Please don't remove this: Grab your social icons from https://github.com/carlsednaoui/gitsocial -->
 
-# About LaTeX.Online [![alt text][1.1]][1]
+## About LaTeX.Online [![alt text][1.1]][1]
 
 This service is developed to compile latex documents online. It can build PDF directly from GIT repository with TeX sources or from any link to TeX file. 
 
