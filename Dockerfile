@@ -14,14 +14,14 @@ ENV TL_VERSION 2018
 # Download TeXlive source .iso
 # We do this first thing here, so that the long download does not need to restart 
 # in case next RUN fails
-RUN wget -q   http://mirrors.ctan.org/systems/texlive/Images/texlive$TL_VERSION.iso 
+RUN wget -q  http://mirrors.ctan.org/systems/texlive/Images/texlive$TL_VERSION.iso 
 # Install TeXlive profile
 # Thanks to https://github.com/papaeye/docker-texlive for the reference
 COPY texlive.profile /tmp/
 
 # Sorted list of used packages.
-RUN echo "deb http://ftp.us.debian.org/debian stretch contrib" > /etc/apt/sources.list.d/contrib.list; \
-    echo "deb http://ftp.us.debian.org/debian stretch-updates contrib" >> /etc/apt/sources.list.d/contrib.list;
+RUN echo "deb http://deb.debian.org/debian stretch contrib" > /etc/apt/sources.list.d/contrib.list; \
+    echo "deb http://deb.debian.org/debian stretch-updates contrib" >> /etc/apt/sources.list.d/contrib.list;
 
 RUN export DEBIAN_FRONTEND=noninteractive \
 # Update/Upgrade
@@ -62,6 +62,9 @@ RUN apt-get clean && apt-get update && apt-get install -y \
 # Add xindy-2.2 instead of makeindex.
 ADD ./packages/xindy-2.2-rc2-linux.tar.gz /opt
 ENV PATH="/opt/xindy-2.2/bin:${PATH}"
+
+# Get latest and greatest packages
+RUN tlmgr update --self && tlmgr update --all
 
 COPY ./util/docker-entrypoint.sh /
 COPY . /var/www
