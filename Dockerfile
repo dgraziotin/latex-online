@@ -1,15 +1,15 @@
 # Latex-Online container with Tex Live 2017 (full)
-# Provides aslushnikov/latex-online with chrisanthropic/docker-TeXlive tweaked to get full Tex Live 2017
+# Provides aslushnikov/latex-online with chrisanthropic/docker-TeXlive tweaked to get full Tex Live 2018
 # VERSION       1
 
 # use the ubuntu base image provided by dotCloud
-FROM node:7
+FROM node:8.9.1-stretch
 
 MAINTAINER Andrey Lushnikov aslushnikov@gmail.com
 MAINTAINER Daniel Graziotin daniel@ineed.coffee
 
-## Install TeXlive 2017. Change it accordingly.
-ENV TL_VERSION 2017
+## Install TeXlive 2018. Change it accordingly.
+ENV TL_VERSION 2018
 
 # Download TeXlive source .iso
 # We do this first thing here, so that the long download does not need to restart 
@@ -20,8 +20,8 @@ RUN wget -q   http://mirrors.ctan.org/systems/texlive/Images/texlive$TL_VERSION.
 COPY texlive.profile /tmp/
 
 # Sorted list of used packages.
-RUN echo "deb http://ftp.us.debian.org/debian jessie contrib" > /etc/apt/sources.list.d/contrib.list; \
-    echo "deb http://ftp.us.debian.org/debian jessie-updates contrib" >> /etc/apt/sources.list.d/contrib.list;
+RUN echo "deb http://ftp.us.debian.org/debian stretch contrib" > /etc/apt/sources.list.d/contrib.list; \
+    echo "deb http://ftp.us.debian.org/debian stretch-updates contrib" >> /etc/apt/sources.list.d/contrib.list;
 
 RUN export DEBIAN_FRONTEND=noninteractive \
 # Update/Upgrade
@@ -52,8 +52,11 @@ ENV PATH /texlive/bin/x86_64-linux:$PATH
 RUN luaotfload-tool -u -v
 
 # Prepare latex-online
-RUN apt-get update && apt-get install -y \
+RUN apt-get clean && apt-get update && apt-get install -y \
     git-core \
+    fontconfig \
+    cm-super \
+    preview-latex-style \
     python3 
 
 # Add xindy-2.2 instead of makeindex.
@@ -61,7 +64,7 @@ ADD ./packages/xindy-2.2-rc2-linux.tar.gz /opt
 ENV PATH="/opt/xindy-2.2/bin:${PATH}"
 
 COPY ./util/docker-entrypoint.sh /
+COPY . /var/www
 
 EXPOSE 2700
 CMD ["./docker-entrypoint.sh"]
-
