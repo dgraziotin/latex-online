@@ -1,7 +1,9 @@
 # About enhanced LaTeX.Online
 This service provides the same functionality offered by [aslushnikov/latex-online](https://github.com/aslushnikov/latex-online).
 However, this fork adapts the Docker installation directives by [chrisanthropic/docker-TeXlive](chrisanthropic/docker-TeXlive)
-to provide a LaTeX.Online service with a working full TeX Live 2017. For a refreshingly updated LaTeX.Online!
+to provide a LaTeX.Online service with a working full TeX Live 2018. Packages are also updated with tlmgr upon deployment. 
+
+For a refreshingly updated LaTeX.Online!
 
 The remaining of this README is the same as the one of [aslushnikov/latex-online](https://github.com/aslushnikov/latex-online).
 
